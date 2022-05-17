@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+
+    web:
+        image: wodby/nginx
+        container_name: "${PROJECT_NAME}_nginx"
+        restart: always
+        volumes:
+            - ./index.html/:/var/www/html/index.html
+        networks:
+            - web
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.${PROJECT_NAME}_http.rule=Method(`GET`)"
+            - "traefik.http.routers.${PROJECT_NAME}_http.entrypoints=web"
+            - "traefik.http.routers.${PROJECT_NAME}_https.rule=Method(`GET`)"
+            - "traefik.http.routers.${PROJECT_NAME}_https.entrypoints=websecure"
+            - "traefik.http.routers.${PROJECT_NAME}_https.tls=true"
+            - "traefik.frontend.priority=0"
+
+networks:
+    web:
+        name: jandolejs_cz
+        external: true
+
