@@ -11,15 +11,18 @@ services:
         networks:
             - web
         labels:
+            # Enable traefik
             - "traefik.enable=true"
+            - "traefik.frontend.priority=0" # last
+
+            # Route http GET requests
             - "traefik.http.routers.${PROJECT_NAME}_http.rule=Method(`GET`)"
             - "traefik.http.routers.${PROJECT_NAME}_http.entrypoints=web"
+
+            # Route https GET requests
             - "traefik.http.routers.${PROJECT_NAME}_https.rule=Method(`GET`)"
             - "traefik.http.routers.${PROJECT_NAME}_https.entrypoints=websecure"
             - "traefik.http.routers.${PROJECT_NAME}_https.tls=true"
-            - "traefik.frontend.priority=0"
-
 networks:
     web:
-        name: jandolejs_cz
-
+        name: www
