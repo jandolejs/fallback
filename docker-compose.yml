@@ -1,6 +1,10 @@
 services:
 
     web:
+        build:
+            context: .
+            platforms:
+                - linux/amd64
         image: wodby/nginx
         container_name: "fallback_frontend"
         restart: always
