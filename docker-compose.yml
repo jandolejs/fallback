@@ -5,6 +5,6 @@ services:
         container_name: "fallback_frontend"
         restart: always
         volumes:
-            - ./index.html/:/var/www/html/index.html
+            - ./index.html:/var/www/html/index.html
         ports:
             - 80:80
