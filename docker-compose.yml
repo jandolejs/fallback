@@ -5,10 +5,8 @@ services:
             context: .
             platforms:
                 - linux/amd64
-        image: wodby/nginx
+        image: fallback_image_temp
         container_name: "fallback_frontend"
         restart: always
-        volumes:
-            - ./index.html:/var/www/html/index.html
         ports:
             - 80:80
