@@ -5,7 +5,6 @@ services:
             context: .
             platforms:
                 - linux/amd64
-        image: fallback_image_temp
         container_name: "fallback_frontend"
         restart: always
         ports:
