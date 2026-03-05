@@ -1,28 +1,10 @@
-version: "3.9"
-
 services:
 
     web:
         image: wodby/nginx
-        container_name: "${PROJECT_NAME}_nginx"
+        container_name: "fallback_frontend"
         restart: always
         volumes:
             - ./index.html/:/var/www/html/index.html
-        networks:
-            - web
-        labels:
-            # Enable traefik
-            - "traefik.enable=true"
-            - "traefik.frontend.priority=0" # last
-
-            # Route http GET requests
-            - "traefik.http.routers.${PROJECT_NAME}_http.rule=Method(`GET`)"
-            - "traefik.http.routers.${PROJECT_NAME}_http.entrypoints=web"
-
-            # Route https GET requests
-            - "traefik.http.routers.${PROJECT_NAME}_https.rule=Method(`GET`)"
-            - "traefik.http.routers.${PROJECT_NAME}_https.entrypoints=websecure"
-            - "traefik.http.routers.${PROJECT_NAME}_https.tls=true"
-networks:
-    web:
-        name: www
+        ports:
+            - 80:80
